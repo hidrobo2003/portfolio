@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio — Riwi Projects</title>
+  <link rel="stylesheet" href="../../../css/style.css">
+</head>
+<body>
+
+<nav id="main-nav"></nav>
+
+<main>
+  <div class="page-title-bar">
+    <h1>Projects / <span style="color:var(--accent)">Riwi</span></h1>
+    <div class="title-accent-line"></div>
+  </div>
+
+  <div class="module-tabs" id="module-tabs"></div>
+
+  <div id="module-title"></div>
+
+  <div id="projects-container"></div>
+</main>
+
+<script src="../../../js/main.js"></script>
+<script>
+  buildNav('projects_riwi');
+
+  const TOTAL_MODULES = 6;
+  let activeModule = null;
+
+  // Render the module buttons (no active state, no projects loaded yet)
+  function renderModuleTabs() {
+    const tabsEl = document.getElementById('module-tabs');
+    tabsEl.innerHTML = Array.from({ length: TOTAL_MODULES }, (_, i) => {
+      const m = i + 1;
+      return `<button class="module-tab" onclick="selectModule(${m})">Module ${m}</button>`;
+    }).join('');
+  }
+
+  async function selectModule(moduleNumber) {
+    if (activeModule === moduleNumber) return;
+    activeModule = moduleNumber;
+
+    // Update tab active state
+    document.querySelectorAll('.module-tab').forEach((btn, i) => {
+      btn.classList.toggle('active', i + 1 === moduleNumber);
+    });
+
+    // Show module title
+    document.getElementById('module-title').innerHTML =
+      `<h2 style="text-align:center; margin: 1.2rem 0 0.5rem; font-size:1.6rem;">Module ${moduleNumber}</h2>`;
+
+    // Load and render projects
+    const container = document.getElementById('projects-container');
+    renderLoading(container);
+    try {
+      const projects = await fetchProjectsByModule(state.lang, moduleNumber);
+      renderTable(container, projects);
+    } catch (e) {
+      renderError(container, 'Could not load projects from API.');
+      console.error(e);
+    }
+  }
+
+  function onLangChange(lang) {
+    // Reload current module with new language
+    if (activeModule !== null) selectModule(activeModule);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderModuleTabs();
+  });
+</script>
+</body>
+</html>

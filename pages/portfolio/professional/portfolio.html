@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio — Professional Projects</title>
+  <link rel="stylesheet" href="../../../css/style.css">
+</head>
+<body>
+
+<nav id="main-nav"></nav>
+
+<main>
+  <div class="page-title-bar">
+    <h1>Projects / <span style="color:var(--accent)">Professional</span></h1>
+    <div class="title-accent-line"></div>
+  </div>
+
+  <div id="projects-container">
+    <div class="state-box"><div class="loader"></div><br>Loading projects...</div>
+  </div>
+</main>
+
+<script src="../../../js/main.js"></script>
+<script>
+  buildNav('projects_professional');
+
+  async function loadProjects(lang) {
+    const container = document.getElementById('projects-container');
+    renderLoading(container);
+    try {
+      const all = await fetchProjectsByType(lang, 'professional');
+      // Filter for professional type
+      const filtered = all.filter(p => {
+        const t = (p.type || p.tipo || '').toLowerCase();
+        return t.includes('professional') || t.includes('profesional');
+      });
+      renderTable(container, filtered.length > 0 ? filtered : all);
+    } catch (e) {
+      renderError(container, 'Could not load projects from API.');
+      console.error(e);
+    }
+  }
+
+  function onLangChange(lang) {
+    loadProjects(lang);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadProjects(state.lang);
+  });
+</script>
+</body>
+</html>
