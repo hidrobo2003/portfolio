@@ -69,6 +69,9 @@ function buildNav(activePage) {
   const isProjectActive = ['projects_riwi','projects_professional','projects_personal'].includes(activePage);
 
   nav.innerHTML = `
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menú" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
     <div class="nav-left">
       <a href="${path('home')}" class="nav-btn ${activePage === 'home' ? 'active' : ''}">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
@@ -118,6 +121,13 @@ function buildNav(activePage) {
       </div>
     </div>
   `;
+}
+
+function toggleMobileNav() {
+  const nav = document.querySelector('nav');
+  const btn = document.getElementById('nav-hamburger');
+  nav.classList.toggle('nav-open');
+  btn.classList.toggle('open');
 }
 
 function toggleDropdown(id) {
@@ -207,19 +217,19 @@ function renderTable(container, projects) {
     const title = p.title || p.titulo || 'Activity';
 
     return `<tr>
-      <td class="link-cell">${problem ? `<a href="${escHtml(problem)}" target="_blank" rel="noopener">
+      <td class="link-cell" data-label="Activity">${problem ? `<a href="${escHtml(problem)}" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         ${escHtml(title)}
       </a>` : '<span style="color:var(--text3)">—</span>'}</td>
-      <td class="link-cell">${repo ? `<a href="${escHtml(repo)}" target="_blank" rel="noopener">
+      <td class="link-cell" data-label="Repository">${repo ? `<a href="${escHtml(repo)}" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
         Repo
       </a>` : '<span style="color:var(--text3)">—</span>'}</td>
-      <td class="link-cell">${deploy ? `<a href="${escHtml(deploy)}" target="_blank" rel="noopener">
+      <td class="link-cell" data-label="Deploy">${deploy ? `<a href="${escHtml(deploy)}" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         Deploy
       </a>` : '<span style="color:var(--text3)">—</span>'}</td>
-      <td>${escHtml(desc)}</td>
+      <td data-label="Description">${escHtml(desc)}</td>
     </tr>`;
   }).join('');
 

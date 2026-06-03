@@ -526,3 +526,250 @@ main {
   .photo-circle { width: 200px; height: 200px; }
   nav { flex-wrap: wrap; padding: 0.5rem 1rem; }
 }
+
+/* ===== HAMBURGER MENU ===== */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 7px;
+  transition: all var(--transition);
+  margin-left: auto;
+}
+.nav-hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: all var(--transition);
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-hamburger:hover { background: var(--accent); border-color: var(--accent); }
+.nav-hamburger:hover span { background: #fff; }
+
+/* ===== RESPONSIVE — TABLET (≤ 900px) ===== */
+@media (max-width: 900px) {
+  nav {
+    padding: 0.6rem 1.4rem;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .home-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  .home-photo-wrap { justify-content: center; }
+  .photo-circle { width: 220px; height: 220px; }
+  .home-info h1 { font-size: 2.2rem; }
+  .home-actions { justify-content: center; }
+
+  .page-title-bar h1 { font-size: 1.6rem; }
+
+  .projects-table { font-size: 0.78rem; }
+  .projects-table th, .projects-table td { padding: 0.7rem 0.9rem; }
+
+  .contact-list { max-width: 100%; }
+
+  main { padding: 2rem 1.4rem 3.5rem; }
+}
+
+/* ===== RESPONSIVE — MOBILE (≤ 620px) ===== */
+@media (max-width: 620px) {
+  /* Navbar mobile */
+  nav {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0.55rem 1rem;
+    gap: 0;
+  }
+  .nav-hamburger { display: flex; }
+
+  .nav-left,
+  .nav-right {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-top: 0.5rem;
+  }
+  nav.nav-open .nav-left,
+  nav.nav-open .nav-right {
+    display: flex;
+  }
+  nav.nav-open .nav-right { padding-top: 0; border-top: 1px solid var(--border); margin-top: 0.4rem; padding-bottom: 0.4rem; }
+
+  .nav-btn {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0.6rem 1rem;
+    font-size: 0.92rem;
+  }
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    padding-left: 1.2rem;
+    background: transparent;
+    animation: none;
+    display: none;
+  }
+  .dropdown.open .dropdown-menu { display: block; }
+  .dropdown-item { font-size: 0.88rem; padding: 0.5rem 1rem; }
+
+  .options-menu {
+    position: static;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    padding-left: 1.2rem;
+    background: transparent;
+    display: none;
+  }
+  .options-wrapper.open .options-menu { display: block; }
+
+  /* Home */
+  main { padding: 1.2rem 0.9rem 3rem; }
+  .home-layout { gap: 1.4rem; }
+  .photo-circle { width: 160px; height: 160px; }
+  .home-info h1 { font-size: 1.8rem; }
+  .home-bio { font-size: 0.88rem; padding: 1rem 1.1rem; }
+  .diamond-btn { width: 68px; height: 68px; font-size: 0.62rem; }
+  .diamond-btn svg { width: 15px; height: 15px; }
+
+  /* Page title */
+  .page-title-bar { gap: 0.6rem; margin-bottom: 1.2rem; }
+  .page-title-bar h1 { font-size: 1.35rem; white-space: nowrap; }
+
+  /* Module tabs */
+  .module-tabs { gap: 0.4rem; }
+  .module-tab { padding: 0.42rem 0.9rem; font-size: 0.78rem; }
+
+  /* Table → card layout on mobile */
+  .projects-table-wrap {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+  }
+  .projects-table, .projects-table thead, .projects-table tbody,
+  .projects-table th, .projects-table td, .projects-table tr {
+    display: block;
+  }
+  .projects-table thead { display: none; }
+  .projects-table tr {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    padding: 0.8rem 1rem;
+    box-shadow: var(--shadow);
+  }
+  .projects-table tr:nth-child(even) td { background: transparent; }
+  .projects-table tr:hover td { background: transparent; }
+  .projects-table td {
+    border: none;
+    padding: 0.3rem 0;
+    font-size: 0.82rem;
+    color: var(--text2);
+  }
+  .projects-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--accent);
+    margin-bottom: 2px;
+  }
+  .projects-table td + td { margin-top: 0.5rem; }
+
+  /* Contact */
+  .contact-item { gap: 0.8rem; }
+  .contact-icon { width: 44px; height: 44px; }
+  .contact-label { font-size: 0.88rem; padding: 0.8rem 1rem; }
+
+  /* Message page */
+  .message-box { padding: 2rem 1.2rem; }
+  .message-box h2 { font-size: 1.3rem; }
+}
+
+/* ===== MESSAGE PAGE ===== */
+.message-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1.4rem;
+  padding: 3.5rem 2rem;
+  margin-top: 1rem;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow-lg);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.message-icon {
+  width: 72px;
+  height: 72px;
+  background: var(--diamond-bg);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.message-icon svg { width: 34px; height: 34px; }
+.message-box h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
+}
+.message-box p {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--text2);
+  line-height: 1.75;
+  max-width: 420px;
+}
+.message-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 9px;
+  padding: 0.6rem 1.4rem;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background var(--transition), transform var(--transition);
+}
+.message-back-btn:hover {
+  background: var(--accent2);
+  transform: translateY(-1px);
+}
+.message-back-btn svg { width: 15px; height: 15px; }
