@@ -6,20 +6,21 @@
   <title>Portfolio — Riwi Projects</title>
   <link rel="stylesheet" href="../../../css/style.css">
 </head>
-<body>
+<body data-active-page="projects_riwi" data-title-key="title_riwi">
 
 <nav id="main-nav"></nav>
 
 <main>
   <div class="page-title-bar">
-    <h1>Projects / <span style="color:var(--accent)">Riwi</span></h1>
+    <h1>
+      <span data-i18n="page_projects">Projects</span>
+      / <span style="color:var(--accent)" data-i18n="page_riwi">Riwi</span>
+    </h1>
     <div class="title-accent-line"></div>
   </div>
 
   <div class="module-tabs" id="module-tabs"></div>
-
   <div id="module-title"></div>
-
   <div id="projects-container"></div>
 </main>
 
@@ -30,12 +31,11 @@
   const TOTAL_MODULES = 6;
   let activeModule = null;
 
-  // Render the module buttons (no active state, no projects loaded yet)
   function renderModuleTabs() {
     const tabsEl = document.getElementById('module-tabs');
     tabsEl.innerHTML = Array.from({ length: TOTAL_MODULES }, (_, i) => {
       const m = i + 1;
-      return `<button class="module-tab" onclick="selectModule(${m})">Module ${m}</button>`;
+      return `<button class="module-tab${activeModule === m ? ' active' : ''}" onclick="selectModule(${m})">${t('page_module')} ${m}</button>`;
     }).join('');
   }
 
@@ -43,30 +43,32 @@
     if (activeModule === moduleNumber) return;
     activeModule = moduleNumber;
 
-    // Update tab active state
-    document.querySelectorAll('.module-tab').forEach((btn, i) => {
-      btn.classList.toggle('active', i + 1 === moduleNumber);
-    });
+    renderModuleTabs();
 
-    // Show module title
     document.getElementById('module-title').innerHTML =
-      `<h2 style="text-align:center; margin: 1.2rem 0 0.5rem; font-size:1.6rem;">Module ${moduleNumber}</h2>`;
+      `<h2 style="text-align:center; margin: 1.2rem 0 0.5rem; font-size:1.6rem;">${t('page_module')} ${moduleNumber}</h2>`;
 
-    // Load and render projects
     const container = document.getElementById('projects-container');
     renderLoading(container);
     try {
       const projects = await fetchProjectsByModule(state.lang, moduleNumber);
       renderTable(container, projects);
     } catch (e) {
-      renderError(container, 'Could not load projects from API.');
+      renderError(container, t('error'));
       console.error(e);
     }
   }
 
   function onLangChange(lang) {
-    // Reload current module with new language
-    if (activeModule !== null) selectModule(activeModule);
+    renderModuleTabs();
+    if (activeModule !== null) {
+      document.getElementById('module-title').innerHTML =
+        `<h2 style="text-align:center; margin: 1.2rem 0 0.5rem; font-size:1.6rem;">${t('page_module')} ${activeModule}</h2>`;
+      // Resetear para forzar re-fetch y re-render con los textos del nuevo idioma
+      const moduleToReload = activeModule;
+      activeModule = null;
+      selectModule(moduleToReload);
+    }
   }
 
   document.addEventListener('DOMContentLoaded', () => {

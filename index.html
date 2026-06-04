@@ -6,13 +6,13 @@
   <title>Portfolio — Home</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-active-page="home" data-title-key="title_home">
 
 <nav id="main-nav"></nav>
 
 <main>
   <div class="page-title-bar">
-    <h1>Home</h1>
+    <h1 data-i18n="page_home">Home</h1>
     <div class="title-accent-line"></div>
   </div>
 
@@ -24,15 +24,15 @@
     </div>
 
     <div class="home-info">
-      <h1>About <span>Me</span></h1>
+      <h1><span data-i18n="page_about">About</span> <span style="color:var(--accent)" data-i18n="page_about_me">Me</span></h1>
       <div class="home-bio">
-        <p>Software Developer with backend expertise in C#, .NET, and Laravel, alongside experience managing MySQL and PostgreSQL databases. Proficient in Git, Docker, and both developing and consuming REST APIs. Quick learner, strong problem solver, and a collaborative team player.</p>
+        <p data-i18n="page_bio">Software Developer with backend expertise in C#, .NET, and Laravel, alongside experience managing MySQL and PostgreSQL databases. Proficient in Git, Docker, and both developing and consuming REST APIs. Quick learner, strong problem solver, and a collaborative team player.</p>
       </div>
       <div class="home-actions">
         <a href="pages/contact.html" class="diamond-btn" title="Contact me">
           <span class="diamond-btn-inner">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
-            Contact
+            <span data-i18n="btn_contact">Contact</span>
           </span>
         </a>
         <a href="https://github.com/hidrobo2003" target="_blank" class="diamond-btn" title="GitHub">

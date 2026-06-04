@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio — Sin enlace disponible</title>
+  <title>Portfolio — Link not available</title>
   <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
+<body data-active-page="contact" data-title-key="title_message">
+
+<nav id="main-nav"></nav>
 
 <main>
   <div class="page-title-bar">
-    <h1>Aviso</h1>
+    <h1 data-i18n="page_notice">Notice</h1>
     <div class="title-accent-line"></div>
   </div>
 
@@ -23,13 +25,16 @@
       </svg>
     </div>
 
-    <h2>Enlace no disponible</h2>
+    <h2 data-i18n="msg_title">Link not available</h2>
 
-    <p>
-      Siento las molestias, pero el texto al que intentas acceder
-      no cuenta con un link para observar a detalle la problemática.
-    </p>
+    <p data-i18n="msg_body">We apologize for the inconvenience, but the text you are trying to access does not have a link to view the issue in detail.</p>
 
+    <a href="../index.html" class="message-back-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      <span data-i18n="msg_back">Back to home</span>
+    </a>
   </div>
 </main>
 
