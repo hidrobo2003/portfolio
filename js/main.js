@@ -17,8 +17,9 @@ const i18n = {
     // Páginas
     page_home:           'Home',
     page_about:          'About',
-    page_about_me:       'Me',
-    page_bio:            'Software Developer with backend expertise in C#, .NET, and Laravel, alongside experience managing MySQL and PostgreSQL databases. Proficient in Git, Docker, and both developing and consuming REST APIs. Quick learner, strong problem solver, and a collaborative team player.',
+    page_about_me:       'Me:',
+    page_about_me_name:  'Andrés Hidrobo',
+    page_bio:            'My name is Andrés Hidrobo, a Software Developer focused on backend development and software architecture in C#, .NET, alongside experience managing MySQL and PostgreSQL databases. Proficient in Git, Docker, and both developing and consuming REST APIs. Quick learner, strong problem solver, and a collaborative team player.',
     btn_contact:         'Contact',
 
     page_contact_title:  'Contact <span style="color:var(--accent)">Me</span>',
@@ -69,7 +70,8 @@ const i18n = {
     page_home:           'Inicio',
     page_about:          'Sobre',
     page_about_me:       'Mí',
-    page_bio:            'Desarrollador de software con experiencia en backend en C#, .NET y Laravel, junto con manejo de bases de datos MySQL y PostgreSQL. Competente en Git, Docker, y en el desarrollo y consumo de APIs REST. Aprendiz rápido, gran solucionador de problemas y excelente jugador de equipo.',
+    page_about_me_name:  'Andrés Hidrobo',
+    page_bio:            'Mi nombre es Andrés Hidrobo, desarrollador de software enfocado en el desarrollo backend y la arquitectura de software con C# y .NET, además de contar con experiencia en la gestión de bases de datos MySQL y PostgreSQL. Tengo dominio de herramientas como Git y Docker, así como experiencia en el desarrollo y consumo de APIs REST. Me caracterizo por mi capacidad de aprendizaje rápido, la resolución eficiente de problemas y el trabajo colaborativo en equipo.',
     btn_contact:         'Contacto',
 
     page_contact_title:  'Contáctame',
